@@ -390,7 +390,7 @@ h1 {
 ⇨ 計算機上でシミュレートするときに乱数が必要
 
 
-![bg right h:300](image.png)
+![bg right h:300](img/kabu.png)
 
 ---
 
@@ -817,8 +817,7 @@ julia> monte_carlo_pi(
 | `rand(RandomDevice())` | <span style="color: red;">  536.367  </span> |
 
 
-![bg right h:500](image-8.png)
-
+![bg right h:500](img/rngbench.png)
 
 ---
 
@@ -844,19 +843,3 @@ julia> monte_carlo_pi(
 
 
 ---
-
-<div class="secname">
-
-[2] 擬似乱数生成
-
-</div>
-
-<div class="content">
-
-- 線形合同法
-- Mersenne Twister
-- Xorshift
-
-</div>
-
-</div>
