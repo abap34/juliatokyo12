@@ -300,16 +300,6 @@ h1 {
 
 ---
 
-<!-- _header: 扱わないこと -->
-
-**:warning: 注意: 「乱数」自体の話や、乱数生成全体の話はあまり掘り下げません**
-
-🙅‍♀️ 検定法
-🙅‍♀️ 暗号論っぽい話
-🙅‍♀️ 一般の確率分布にしたがう乱数の生成
-
----
-
 <style scoped>
 
 .toc-sec .secname {
@@ -483,11 +473,36 @@ https://ja.wikipedia.org/wiki/%E7%84%BC%E3%81%8D%E3%81%AA%E3%81%BE%E3%81%97%E6%B
 ## ⇨ 実際どうやるか考えよう
 
 
+---
+
+
+<!-- _header: ここからの目標 -->
+
+## ⚠️ ここからは $[0, 1)^d$ から一様に値を取ってくる方法を考えます
+
+## <ruby>⇨<rp>(</rp><rt>why?</rt><rp>)</rp></ruby> 一様分布に従う乱数から、 <br> 所望の分布に従う乱数に変換する方法が知られているため 📝
+
+
+<span style="font-size: 0.8em;">
+(そして、この方法はこの資料の本筋ではないので割愛します
+
+興味がある方は、キーワード: 逆関数サンプリング, 棄却サンプリング　などで調べる
+
+<div style="text-align: center;">
+
+or
+
+</div>
+
+パターン認識の教科書などを参照してみてください)
+
+</span>
+
 
 ---
 
 
-<!-- _header: 乱数・擬似乱数とは？ -->
+<!-- _header: 乱数の作り方 -->
 
 
 <div class="columns">
@@ -546,7 +561,7 @@ julia> rand()
 
 ---
 
-<!-- _header: 乱数・擬似乱数とは？ -->
+<!-- _header: 乱数の作り方 -->
 
 
 
@@ -592,7 +607,7 @@ int main() {
 
 ---
 
-<!-- _header: 「擬似」乱数 -->
+<!-- _header: 乱数を計算機で作るには？ -->
 
 
 <div class="box">
@@ -611,8 +626,11 @@ int main() {
 
 <div class="thm">
 
+<br>
+
 **決定的な動作しかしない計算機上では、「規則性が <span class="dot-text">ない</span>」列は生成できない.**
 
+<br>
 
 </div>
 
@@ -823,16 +841,18 @@ julia> monte_carlo_pi(
 
 <!-- _header: 擬似乱数 -->
 
-# `rand()` ← じゃあこいつなに？
+## `rand()`  ← やたらと高速なこれ (デフォルト乱数生成器) は何者?
 
 ---
 
 
 <!-- _header: そこで擬似乱数ですよ -->
 
-## <span class="bluelined">アプローチ2: 擬似乱数生成. </span>
+## <span class="bluelined">アプローチ2: 擬似乱数生成器 <br>(Pseudo Random Number Generator, PRNG)</span>
 
-**決定的な動作のみで、 <span class="dot-text">乱数っぽいもの</span> を作る** 
+- 決定的な動作のみで、 **<span class="dot-text">乱数っぽいもの</span>** を作る
+- たいていのプログラミングの標準ライブラリで 「乱数生成器」 として提供される
+
 
 <div class="cite">
 
