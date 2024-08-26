@@ -372,23 +372,26 @@ h1 {
 (のように見えるもの) で溢れている**
 
 - ギャンブル
-- 株価
 - 気象現象
+- 株価 (?)
 
 などなど...
 
-⇨ 計算機上でシミュレートするときに乱数が必要
+⇨ 計算機上で表現するときに乱数が必要
 
 
 ![bg right h:300](img/kabu.png)
+![bg right h:300 vertical](img/image.png-1.png)
 
 ---
 
 <!-- _header: 乱数を使ったさまざまな計算例: モンテカルロ法 -->
 
-## モンテカルロ法 ... 乱数を使った数値計算 
+乱数を使うと色々な計算ができる！
 
-例) モンテカルロ法で $\pi$ の近似値を求める 
+## 例) モンテカルロ法 ... 乱数を使った数値計算 
+
+- モンテカルロ法で $\pi$ の近似値を求める 
 
 <!--  ![bg right h:500](img/random_preface.svg) -->
 
@@ -402,7 +405,7 @@ julia> monte_carlo_pi(10^9)
 
 <div class="cite">
 
-⚠️ 出てくるソースコードはスペースの都合上簡易的であったり色々と省略されています。
+⚠️ この資料で出てくるソースコードはスペースの都合上簡易的であったり色々と省略されていることがあります。
 すべての完全なソースコードは https://github.com/abap34/juliatokyo12/tree/main/src に掲載されています。
 
 </div>
@@ -413,10 +416,9 @@ julia> monte_carlo_pi(10^9)
 <!-- _header: 例) 焼きなまし法 -->
 
 
-焼きなまし法 
-(Simulated Annealing)
- 
-による最小化
+例) 焼きなまし法 
+(Simulated Annealing) 
+による最適化
 
 ```julia
 function anealing(f::Function, init::Float64)
@@ -479,8 +481,7 @@ https://ja.wikipedia.org/wiki/%E7%84%BC%E3%81%8D%E3%81%AA%E3%81%BE%E3%81%97%E6%B
 <!-- _header: ここからの目標 -->
 
 ## ⚠️ ここからは $[0, 1)^d$ から一様に値を取ってくる方法を考えます
-
-## <ruby>⇨<rp>(</rp><rt>why?</rt><rp>)</rp></ruby> 一様分布に従う乱数から、 <br> 所望の分布に従う乱数に変換する方法が知られているため 📝
+## <ruby>⇨<rp>(</rp><rt>why?</rt><rp>)</rp></ruby> 一様分布に従う乱数から <span class="dot-text">所望の分布</span> に従う乱数に変換可能
 
 
 <span style="font-size: 0.8em;">
@@ -684,7 +685,7 @@ int main() {
 
 ✅ 真の乱数は「予測できない」という乱数の本来の性質を忠実に持っている！
 
-⇨ 例えば、パスワードの生成などではとても便利・たぶん安全
+⇨ 例えば、パスワードの生成などではとても便利・**たぶん**安全
 
 
 ```bash
@@ -736,7 +737,7 @@ C言語版: https://onecompiler.com/c/42prbqnjz
 
 <!-- _header: 乱数生成と再現性 -->
 
-✅ Julia では `rng = RandomDevice()` として `/dev/random` から乱数を生成することができる [^1]
+✅ `rng = RandomDevice()` として `/dev/random` から乱数を生成することができる [^1]
 
 ```julia-repl
 julia> rng = RandomDevice()
@@ -764,7 +765,7 @@ julia> rand(rng)      # 引数で RNG を指定すること以外は見た目は
 <br>
 <br>
 
-実行のたび、計算結果は変わる。 **( <span class="dot-text">乱数</span>  だから)**　
+実行のたび、計算結果は変わる。 **( <span class="dot-text">乱数</span>  だからあたりまえ)**　
 
 <div style="font-size: 0.9em;"> 
 
