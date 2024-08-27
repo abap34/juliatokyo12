@@ -60,7 +60,7 @@ theme: honwaka
 
 - 個人開発 :gear:
 - 機械学習 :robot:
-- 最近は自炊をすること :cook:
+- 最近は自炊再ブーム :cook:
 
 
 ![center ](https://github-readme-stats-git-featuredisplayb-a97b36-abap34s-projects.vercel.app/api/top-langs?username=abap34&hide=jupyter%20notebook,HTML,Rich%20Text%20Format,CSS,SCSS&stats_format=bytes_long&langs_count=6&count_private=true&layout=compact&disable_animations=true&card_width=340)
@@ -203,7 +203,6 @@ h1 {
 - 乱数とは？
 - 真の乱数
 - 乱数生成と再現性
-- 擬似乱数
 
 </div>
 
@@ -213,15 +212,15 @@ h1 {
 
 <div class="secname">
 
-[2] 擬似乱数生成
+[2] 擬似乱数生成と検定
 
 </div>
 
 <div class="content">
 
+- 擬似乱数
 - 線形合同法
-- Mersenne Twister
-- Xorshift
+- スペクトル検定
 
 </div>
 
@@ -238,7 +237,7 @@ h1 {
 <div class="content">
 
 - 並列処理入門
-- 並列実行によって再現性が失われる例
+- 再現性が失われる例
 
 </div>
 
@@ -842,25 +841,10 @@ julia> monte_carlo_pi(
 
 <!-- _header: 擬似乱数 -->
 
-## `rand()`  ← やたらと高速なこれ (デフォルト乱数生成器) は何者?
+- みんな同じ手順で生成すれば同じものが得られる
+- 高速
 
----
-
-
-<!-- _header: そこで擬似乱数ですよ -->
-
-## <span class="bluelined">アプローチ2: 擬似乱数生成器 <br>(Pseudo Random Number Generator, PRNG)</span>
-
-- 決定的な動作のみで、 **<span class="dot-text">乱数っぽいもの</span>** を作る
-- たいていのプログラミングの標準ライブラリで 「乱数生成器」 として提供される
-
-
-<div class="cite">
-
-暗号論の文脈では、もう少し厳密に擬似乱数の定義について議論ができますが、 (筆者があまり詳しくないので) この資料ではあまり触れません。
-興味がある方は https://www.ieice-hbkb.org/files/01/01gun_03hen_11.pdf などを参考にすると良さそうです。
-
-</div>
+な「乱数」が欲しい！
 
 
 ---
