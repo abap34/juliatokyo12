@@ -10,19 +10,37 @@ theme: honwaka
 
 <div class="secname">
 
-[2] 擬似乱数生成
+[2] 擬似乱数生成と検定
 
 </div>
 
 <div class="content">
 
+- 擬似乱数生成
 - 線形合同法
-- Mersenne Twister
-- Xorshift
+- スペクトル検定
 
 </div>
 
 </div>
+
+---
+
+<!-- _header: そこで、擬似乱数 -->
+
+## <span class="bluelined">アプローチ2: 擬似乱数生成器 <br>(Pseudo Random Number Generator, PRNG)</span>
+
+- 決定的な動作のみで、 **<span class="dot-text">乱数っぽいもの</span>** を作る
+- たいていのプログラミングの標準ライブラリで 「乱数生成器」 として提供される
+
+
+<div class="cite">
+
+暗号論の文脈では、もう少し厳密に擬似乱数の定義について議論ができますが、 (筆者があまり詳しくないので) この資料ではあまり触れません。
+興味がある方は https://www.ieice-hbkb.org/files/01/01gun_03hen_11.pdf などを参考にすると良さそうです。
+
+</div>
+
 
 ---
 
@@ -56,8 +74,6 @@ theme: honwaka
 </div>
 
 </div>
-
-
 
 
 ---
@@ -271,8 +287,9 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 
 ### [線形合同法の基本的な性質]
 
-(1) 得られる列は長さが高々 $M$ の周期を持つ　
-(2) 同一周期で同じ数は二度と出現しない
+(1) 同一周期で同じ数は二度と出現しない
+(2) 得られる列は長さが高々 $M$ の周期を持つ　
+
 
 </div>
 
@@ -372,7 +389,6 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 - 自分の使いたい擬似乱数に求められている性質を考える
 - その性質を乱数検定でチェック
 
-して、パスするかチェックして使う
 
 (検定にパス $\Rightarrow$ いい乱数 は偽だが
  検定に落ちる $\Rightarrow$ だめな乱数 は真)
@@ -390,18 +406,84 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 
 <!-- _header: 線形合同法 -->
 
-まとめると...
+**線形合同法自体の性質を** まとめると...
 
 - 実装はお手軽で
 - 空間計算量も軽い
 
 が、質の悪い乱数を生みがち 🫤
 
+<span style="font-size: 0.8em;">(紹介したもの意外でも致命的な弱点がたくさん... 参考文献の [3] などをどうぞ）
+</span>
 
-### ⇨ 本当にメモリの制約が厳しい場合をのぞき、現代で使う場面はあまりない
+### ⇨ <span class="orangelined"> 本当にメモリの制約が厳しい場合をのぞき、現代で使う場面はあまりない</span>
 
 ---
 
-<!-- _header: Merusenne Twister -->
+<!-- _header: この例で言いたかったこと -->
 
+✅ 決定的な動作によって、「乱数っぽいもの」を生成できる 
+✅ それがちゃんと「欲しい乱数」であるかは乱数検定をすることで **検討** できる
+
+---
+
+<!-- _header: Mersenne Twister -->
+<br>
+
+## 二つめの例: <span class="bluelined">Mersenne Twister</span> 
+
+- Julia 1.6 まではデフォルトに採用されていた、とても実用的・主要な乱数生成器
+https://docs.julialang.org/en/v1.6/stdlib/Random/
+ <span style="font-size: 0.8em;">↑ Julia の Doc に広島大のページが貼られていて凄い</span>
+
+- **多次元でも均等に分布する** ことが保証されている！
+- 周期がとても長い！ ($2^{19937} - 1 \approx 10^{6000}$)
+  - 線形合同法では、高々 $M$ 
+- SIMD で高速化可能！ (http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/SFMT/index.html)
+
+---
+
+<!-- _header: Mersenne Twister -->
+
+色々なところでデフォルトの乱数生成器として使われている / いた. 
+
+```julia-repl
+julia> versioninfo()
+Julia Version 1.6.7
+Commit 3b76b25b64 (2022-07-19 15:11 UTC)
+Platform Info:
+  OS: macOS (x86_64-apple-darwin21.4.0)
+  CPU: Apple M2
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-11.0.1 (ORCJIT, westmere)
+
+julia> Random.default_rng()
+MersenneTwister(0xb64166ab5b12df4dc1df3351babcb816, (0, 1002, 0, 1))
+```
+
+---
+
+<!-- _header: Mersenne Twister ? -->
+
+色々なところでデフォルトの乱数生成器として使われている / <span style="font-size: 1.2em;"><span style="color: red;">**いた**</span></span>
+
+```julia-repl
+julia> versioninfo()
+Julia Version 1.11.0-rc2
+Commit 34c3a63147b (2024-07-29 06:24 UTC)
+Build Info:
+  Official https://julialang.org/ release
+Platform Info:
+  OS: macOS (arm64-apple-darwin22.4.0)
+  CPU: 8 × Apple M2
+  WORD_SIZE: 64
+  LLVM: libLLVM-16.0.6 (ORCJIT, apple-m2)
+Threads: 1 default, 0 interactive, 1 GC (on 4 virtual cores)
+
+julia> copy(Random.default_rng())
+Xoshiro(0xd61a5db6fa36f012, 0xfe333f52e0297386, 0x303b3ad67aa60728, 0xb67bb83a380206b7, 0xde1ca16d107d0c59)
+```
+
+---
 
