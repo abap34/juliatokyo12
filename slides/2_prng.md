@@ -331,14 +331,14 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 <span class="orangelined">**$N$-クイーン問題 (の斜めなしver) の制約を満たす点のみから選ばれることになり**
 </span>　
 
-一様な分布が得られない可能性がある. [^1]
+一様な分布が得られない可能性がある. $^{*1}$
 
 
 
 
 <div class="cite">
 
-[1] より進んだ結果として、線形合同法を使って $[0, 1)^d$ に点を打つと、全ての点は $(d! \cdot M)^{1/d}$ 個の並行な超平面に乗ることが知られています。 (Marsagliaの定理)　
+$*1$ より進んだ結果として、線形合同法を使って $[0, 1)^d$ に点を打つと、全ての点は $(d! \cdot M)^{1/d}$ 個の並行な超平面に乗ることが知られています。 (Marsagliaの定理)　
 
 
 </div>
@@ -366,7 +366,7 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 ⇩
 
 
-**スペクトル検定** [^1]
+**スペクトル検定** $^{*1}$
 
 
 </div>
@@ -375,7 +375,7 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 
 <div class="cite">
 
-[1] 最初に書いたようにこの資料の本筋ではないので、具体的な定義やアルゴリズムは割愛します。興味があるかたは資料末尾の参考文献 [1] などが詳しいです。
+$*1$ 最初に書いたようにこの資料の本筋ではないので、具体的な定義やアルゴリズムは割愛します。興味があるかたは資料末尾の参考文献 $*1$ などが詳しいです。
 
 </div>
 
@@ -466,6 +466,8 @@ MersenneTwister(0xb64166ab5b12df4dc1df3351babcb816, (0, 1002, 0, 1))
 
 <!-- _header: Mersenne Twister ? -->
 
+<br>
+
 色々なところでデフォルトの乱数生成器として使われている / <span style="font-size: 1.2em;"><span style="color: red;">**いた**</span></span>
 
 ```julia-repl
@@ -484,6 +486,11 @@ Threads: 1 default, 0 interactive, 1 GC (on 4 virtual cores)
 julia> copy(Random.default_rng())
 Xoshiro(0xd61a5db6fa36f012, 0xfe333f52e0297386, 0x303b3ad67aa60728, 0xb67bb83a380206b7, 0xde1ca16d107d0c59)
 ```
+
+なぜ Mersenne Twister から変わったのか？ ヒントは **並列処理⇨**
+
+
+
 
 ---
 
