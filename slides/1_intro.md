@@ -194,7 +194,7 @@ h1 {
 
 <div class="secname">
 
-[1] イントロダクション
+$*1$ イントロダクション
 
 </div>
 
@@ -299,33 +299,19 @@ h1 {
 
 ---
 
-<style scoped>
+<!-- _header: このスライドについて -->
 
-.toc-sec .secname {
-    font-size: 1.4em;
-    font-weight: bold;
-    padding: 0;
-    margin: 0;
-}
+<br>
 
-.toc-sec .content {
-    font-size: 1.2em;
-    text-align: left;
-    padding: 0;
-    margin: 0;
-}
+- このスライドは、おもに科学技術計算、機械学習 etc... における擬似乱数生成について <span style="color: red;">**「再現性」**</span> の観点からプログラミング言語がどのような工夫をしているのか？というのを書いたものです！
+- なるべく、擬似乱数や OS などの前提知識なしでも読めるように書かれています
+- が、網羅的・体系的ではないです 🙅‍♀️
+  - 例えば、基本的なのに扱っていない生成器がたくさんあります
+  - 他にも、乱数検定などの重要なトピックも触れる程度です
+  - これらについては、末尾の参考文献などを参照してください。 <br> (+ 各ページで、重要だが飛ばしたものについて参考文献を書いています)
+- ソースコード: https://github.com/abap34/juliatokyo12/tree/main/src 
 
-.toc-sec ul li {
-    list-style-type: none;
-}
-
-.toc-sec ul li::before {
-    content: "▶︎  ";
-    font-size: 0.5em;
-    margin-right: 5px;   
-}
-
-</style>
+---
 
 
 <div class="toc-sec">
@@ -350,16 +336,18 @@ h1 {
 ---
 <!-- _header: 乱数とは？ -->
 
-<div class="def">
+<div class="def" style="font-size: 1.0em;">
 
-### [定義] 乱数列 (ゆるふわ)
+
+## [定義: 乱数列 (ゆるふわ)]
+
 規則性がない、
 つぎの値が予測できない列
 
 
 </div>
 
-![bg right h:700](img/random.svg)
+![bg right:33% h:600](img/random.svg)
 
 
 ---
@@ -386,28 +374,24 @@ h1 {
 
 <!-- _header: 乱数を使ったさまざまな計算例: モンテカルロ法 -->
 
-乱数を使うと色々な計算ができる！
+<br>
 
-## 例) モンテカルロ法 ... 乱数を使った数値計算 
+## モンテカルロ法 ... <br> 乱数を使った数値計算 
 
 - モンテカルロ法で $\pi$ の近似値を求める 
 
-<!--  ![bg right h:500](img/random_preface.svg) -->
+
+![bg right:45% h:500](img/random_preface.svg)
 
 ```julia-repl
-julia> monte_carlo_pi(n) = 4 * mean(rand()^2 + rand()^2 < 1 for _ in 1:n)
+julia> monte_carlo_pi(n) =
+       4 * mean(rand()^2 + rand()^2 < 1 for _ in 1:n)
 monte_carlo_pi (generic function with 1 method)
 
 julia> monte_carlo_pi(10^9)
 3.141590948
 ```
 
-<div class="cite">
-
-⚠️ この資料で出てくるソースコードはスペースの都合上簡易的であったり色々と省略されていることがあります。
-すべての完全なソースコードは https://github.com/abap34/juliatokyo12/tree/main/src に掲載されています。
-
-</div>
 
 
 ---
@@ -415,9 +399,9 @@ julia> monte_carlo_pi(10^9)
 <!-- _header: 例) 焼きなまし法 -->
 
 
-例) 焼きなまし法 
+**焼きなまし法 
 (Simulated Annealing) 
-による最適化
+による最適化**
 
 ```julia
 function anealing(f::Function, init::Float64)
@@ -457,8 +441,7 @@ https://ja.wikipedia.org/wiki/%E7%84%BC%E3%81%8D%E3%81%AA%E3%81%BE%E3%81%97%E6%B
 <div style="text-align: center;">
 
 
-# <span class="orangelined">乱数だらけ！</span>
-
+# 乱数だらけ！
 
 </div>
 
@@ -484,17 +467,9 @@ https://ja.wikipedia.org/wiki/%E7%84%BC%E3%81%8D%E3%81%AA%E3%81%BE%E3%81%97%E6%B
 
 
 <span style="font-size: 0.8em;">
-(そして、この方法はこの資料の本筋ではないので割愛します
+(の方法はこの資料の本筋ではないので割愛します。 興味がある方は、
 
-興味がある方は、キーワード: 逆関数サンプリング, 棄却サンプリング　などで調べる
-
-<div style="text-align: center;">
-
-or
-
-</div>
-
-パターン認識の教科書などを参照してみてください)
+"逆関数サンプリング", "棄却サンプリング" などを検索するか、参考文献 [4] などを見てみてください)
 
 </span>
 
@@ -644,17 +619,17 @@ int main() {
 
 ## <span class="bluelined">アプローチ1: 外から持ってくる.</span>
 
-例1) `/dev/random`: キーボード入力のような環境からの入力をもとにした予測困難な情報を貯めておいて、 (エントロピープール) そこから計算をして乱数を生成する [^1][^2]
+例1) `/dev/random`: キーボード入力のような環境からの入力をもとにした予測困難な情報を貯めておいて、 (エントロピープール) そこから計算をして乱数を生成する $^{*1*2}$
 
 例2) [BRNG (Banana Random Number Generator)](https://atmarkit.itmedia.co.jp/flinux/rensai/watch2008/watch01b.html): バナナに含まれる放射性カリウムの崩壊を観測して乱数を生成する
 
 
 <div class="cite">
 
-[1] 一部の OS では `/dev/random` でも擬似乱数 (後述) を使っていたようです。(例えば FreeBSD は動作環境が特定されやすいので環境ノイズが予測されやすく、
+$*1$ 一部の OS では `/dev/random` でも擬似乱数 (後述) を使っていたようです。(例えば FreeBSD は動作環境が特定されやすいので環境ノイズが予測されやすく、
 よく設計された擬似乱数生成器の方が安全という判断によるものらしいです。)　さらに Linux でも `/dev/random` 周りではいろいろと変化があり、
 多くの情報が古くなっていそうです。例えば Linux Kernel v5.6 以降では `/dev/random` はエントロピープールが枯渇してもブロックされなくなりました。
-[2] 情報源として、 Linux ではネットワークの情報を使ったり使わなかったりとかいろいろと変化や議論があったみたいです。
+$*2$ 情報源として、 Linux ではネットワークの情報を使ったり使わなかったりとかいろいろと変化や議論があったみたいです。
 例えば、 2008年の記事ですが以下のようなものがあります: https://atmarkit.itmedia.co.jp/flinux/rensai/watch2008/watch01b.html
 
 </div>
@@ -736,7 +711,7 @@ C言語版: https://onecompiler.com/c/42prbqnjz
 
 <!-- _header: 乱数生成と再現性 -->
 
-✅ `rng = RandomDevice()` として `/dev/random` から乱数を生成することができる [^1]
+✅ `rng = RandomDevice()` として `/dev/random` から乱数を生成することができる $^{*1}$
 
 ```julia-repl
 julia> rng = RandomDevice()
@@ -752,7 +727,7 @@ julia> rand(rng)      # 引数で RNG を指定すること以外は見た目は
 
 <div class="cite">
 
-[1] [内部的には `Libc.getrandom!` が呼ばれます。](https://github.com/JuliaLang/julia/blob/9650510b5fa64571178cb9fe8b6799060ae0a3ac/base/libc.jl#L415) `Libc.getrandom!` は　https://docs.libuv.org/en/v1.x/misc.html#c.uv_random　を呼んでいて、これが `getrandom(2)` を使うか、
+$*1$ [内部的には `Libc.getrandom!` が呼ばれます。](https://github.com/JuliaLang/julia/blob/9650510b5fa64571178cb9fe8b6799060ae0a3ac/base/libc.jl#L415) `Libc.getrandom!` は　https://docs.libuv.org/en/v1.x/misc.html#c.uv_random　を呼んでいて、これが `getrandom(2)` を使うか、
  直接 `/dev/random` を読みます。
 
 </div>
@@ -829,9 +804,9 @@ julia> monte_carlo_pi(
 
 例) $N = 10^6$ で円周率計算
 
-| 生成 | 実行時間 [ms] |
-| --- | --- |
-| `rand()` | 2.289 |
+| 生成                   | 実行時間 [ms]                                |
+| ---------------------- | -------------------------------------------- |
+| `rand()`               | 2.289                                        |
 | `rand(RandomDevice())` | <span style="color: red;">  536.367  </span> |
 
 
