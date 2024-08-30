@@ -447,20 +447,27 @@ https://docs.julialang.org/en/v1.6/stdlib/Random/
 
 色々なところでデフォルトの乱数生成器として使われている / いた. 
 
+
+
 ```julia-repl
 julia> versioninfo()
 Julia Version 1.6.7
-Commit 3b76b25b64 (2022-07-19 15:11 UTC)
-Platform Info:
-  OS: macOS (x86_64-apple-darwin21.4.0)
-  CPU: Apple M2
-  WORD_SIZE: 64
+...
   LIBM: libopenlibm
   LLVM: libLLVM-11.0.1 (ORCJIT, westmere)
 
 julia> Random.default_rng()
 MersenneTwister(0xb64166ab5b12df4dc1df3351babcb816, (0, 1002, 0, 1))
 ```
+
+<span style="font-size: 1.2em;">
+
+
+> *Nobody ever got fired for choosing Mersenne Twister.* ─ Chris Wellons (https://nullprogram.com/blog/2017/09/21/) 
+
+
+
+</span>
 
 ---
 
@@ -474,12 +481,7 @@ MersenneTwister(0xb64166ab5b12df4dc1df3351babcb816, (0, 1002, 0, 1))
 julia> versioninfo()
 Julia Version 1.11.0-rc2
 Commit 34c3a63147b (2024-07-29 06:24 UTC)
-Build Info:
-  Official https://julialang.org/ release
-Platform Info:
-  OS: macOS (arm64-apple-darwin22.4.0)
-  CPU: 8 × Apple M2
-  WORD_SIZE: 64
+...
   LLVM: libLLVM-16.0.6 (ORCJIT, apple-m2)
 Threads: 1 default, 0 interactive, 1 GC (on 4 virtual cores)
 
@@ -487,10 +489,11 @@ julia> copy(Random.default_rng())
 Xoshiro(0xd61a5db6fa36f012, 0xfe333f52e0297386, 0x303b3ad67aa60728, 0xb67bb83a380206b7, 0xde1ca16d107d0c59)
 ```
 
-なぜ Mersenne Twister から変わったのか？ ヒントは **並列処理⇨**
-
-
-
-
 ---
 
+
+<!-- _header: Mersenne Twister ? -->
+
+## 疑問: なぜ Julia は Mersenne Twister をやめたのか？ 🤔💭
+
+⇨ <span style="font-size: 2.3em;">ヒントは、  <span class="dot-text">並列処理</span> </span>
