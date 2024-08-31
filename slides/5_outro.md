@@ -41,6 +41,8 @@ theme: honwaka
 
 [6] L’Ecuyer, Pierre, et al. "Random numbers for parallel computers: Requirements and methods, with emphasis on GPUs." Mathematics and Computers in Simulation 135 (2017): 3-17.
 
+[7] 杉山将. 統計的機械学習: 生成モデルに基づくパターン認識. オーム社, 2009. ISBN 9784274502484. Google Books, https://books.google.co.jp/books?id=yK-IQgAACAAJ.
+
 ### ソースコード
 
 https://github.com/abap34/juliatokyo12

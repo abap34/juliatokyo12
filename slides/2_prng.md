@@ -254,8 +254,6 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 
 <div style="text-align: center;">
 
-<span style="font-size: 2em;"><span style="color: red;">**未来の自分へ <br>　ここは時間がないので飛ばしてください**</span>
-</span>
 
 
 満遍なく値をとらず、規則的な並びになってしまった！
