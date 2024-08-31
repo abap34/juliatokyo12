@@ -253,28 +253,7 @@ $*1$ イントロダクション
 
 <div class="content">
 
-- Julia の乱数生成のインターフェース
-- `TaskLocalRNG` の原理と実装
-- 移行の議論を振り返る
-
-</div>
-
-
-</div>
-
-<div class="toc-sec">
-
-<div class="secname">
-
-[5] そのほかの例
-
-
-</div>
-
-<div class="content">
-
-- Numpy における例
-- jax における例
+- 並列計算でも再現性を保つ工夫
 
 </div>
 
@@ -287,9 +266,12 @@ $*1$ イントロダクション
 
 [6] まとめ
 
+
 </div>
 
 <div class="content">
+
+- 参考文献
 
 </div>
 
@@ -812,14 +794,12 @@ julia> monte_carlo_pi(
 
 ![bg right h:500](img/rngbench.png)
 
+
 ---
 
-<!-- _header: 擬似乱数 -->
+<!-- _header: ん？ -->
 
-- みんな同じ手順で生成すれば同じものが得られる
-- 高速
 
-な「乱数」が欲しい！
-
+`rand()` ← これ何？
 
 ---
