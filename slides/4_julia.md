@@ -15,77 +15,18 @@ theme: honwaka
 
 <div class="content">
 
-- Julia の乱数生成のインターフェース
-- `TaskLocalRNG` の原理と実装
+- 並列計算でも再現性を保つ工夫
 
 </div>
 
 
 </div>
 
----
-
-<!-- _header: Julia の乱数生成のインターフェース -->
-
-<br>
-
-### [超基本]
-
-1. `rand(prng)` で `prng` を使って乱数を生成
-2. `Random.seed!(prng, seed)` で `prng` のシードを設定
-
-```julia-repl
-julia> prng = MersenneTwister(34)
-MersenneTwister(34)
-
-julia> rand(prng), rand(prng)
-(0.5421693723520045, 0.8115228540860957)
-
-julia> Random.seed!(prng, 34); rand(prng)
-0.5421693723520045
-
-julia> Random.seed!(prng, 34); rand(prng)
-0.5421693723520045
-```
-
----
-
-<!-- _header: Julia の乱数生成のインターフェース -->
-
-😞 毎回 `prng` を書くのは面倒な利用者も多い.
-
-⇨ `prng` を省略すると、それらは全て `Random.default_rng()` に対して行われる
-(https://github.com/JuliaLang/julia/blob/4c2f728a9976a5651acfe2f7eba703e6d0b64562/stdlib/Random/src/Random.jl#L258)
-
-( 例えば `Random.seed!(34)` は  `Random.seed!(Random.default_rng(), 34)` と等価 )
-
----
-
-<!-- _header: `TaskLocalRNG` の原理と実装 -->
-
-`Random.default_rng()` を確認してみると、 `TaskLocalRNG` が帰ってくる！
-
-
-```julia-repl
-julia> Random.default_rng()
-TaskLocalRNG()
-```
-
----
-
-<!-- _header: `TaskLocalRNG` の原理と実装 -->
-
-Q. `TaskLocalRNG` とは？
-A. その名のとおり、  <span style="font-size: 1.2em;">**`Task` 固有の乱数生成器.**</span>
-
-<span style="font-size: 0.8em;">(※ `Task` についての話も含めるとかなり長くなってしまったので、省略します.
-簡単には、 Julia における「実行」の単位と理解すれば十分で、プロセスと同じように実行・中断・再開ができるものです.`TaskLocalRNG` ついても、各スレッド固有の乱数生成器と考えても今回の話の流れとしては大丈夫です)</span>
-
 
 ---
 
 
-<!-- _header: `TaskLocalRNG` の原理と実装 -->
+<!-- _header: 並列計算でも再現性を保つ工夫 -->
 
 
 ![bg right:40% h:400](img/task_prng.png)
@@ -122,7 +63,7 @@ A. その名のとおり、  <span style="font-size: 1.2em;">**`Task` 固有の�
 ---
 
 
-<!-- _header: `TaskLocalRNG` の原理と実装 -->
+<!-- _header: 並列計算でも再現性を保つ工夫 -->
 
 
 <br>
@@ -204,3 +145,6 @@ Xoshiro(0xf41c78cbc898a2cf, 0xbe2efdab9d7feb15,
 
 ---
 
+<!-- _header: Julia の並列の乱数生成まとめ -->
+
+## ✅ 言語レベルで対応しているおかげで、特に意識しなくても　<br> 並列計算でも再現性を保つことができる！☺️
