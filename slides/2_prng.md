@@ -59,17 +59,17 @@ theme: honwaka
 <div>
 
 
-# 🙆‍♀️
+#
 
-## ⭕️ 乱数の質、検定の考え方
+
+### ⭕️ 擬似乱数生成の基本的な枠組み
+### ⭕️ 乱数の質、検定の考え方
 
 </div>
 
 <div>
 
-# 🙅‍♀️
-
-## ❌ 線形合同法の網羅的な説明
+### ❌ 線形合同法の網羅的な説明
 
 </div>
 
@@ -253,6 +253,9 @@ sample3d!(rng::LCGPRNG) = sample!(rng, 3)
 <!-- _header: 多次元結晶構造 -->
 
 <div style="text-align: center;">
+
+<span style="font-size: 2em;"><span style="color: red;">**未来の自分へ <br>　ここは時間がないので飛ばしてください**</span>
+</span>
 
 
 満遍なく値をとらず、規則的な並びになってしまった！
@@ -497,3 +500,7 @@ Xoshiro(0xd61a5db6fa36f012, 0xfe333f52e0297386, 0x303b3ad67aa60728, 0xb67bb83a38
 ## 疑問: なぜ Julia は Mersenne Twister をやめたのか？ 🤔💭
 
 ⇨ <span style="font-size: 2.3em;">ヒントは、  <span class="dot-text">並列処理</span> </span>
+
+
+---
+
