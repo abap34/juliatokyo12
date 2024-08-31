@@ -356,3 +356,28 @@ end
 ⇨ **シードを固定することによって 
 「<span class="dot-text">乱数生成器が出すもの</span>」
 は変わらないが、各スレッドで得られるものは変わってしまう！**
+
+---
+
+<!-- _header: 対策の需要 -->
+
+- 乱数を使った計算を並列にやるのは頻出のパターン
+  - 機械学習などまさにそう！　
+- <span class="orangelined">**安全に、パフォーマンスよくやる需要がとてもある**</span>
+
+
+## <ruby>⇨<rp>(</rp><rt>そこで</rt><rp>)</rp></ruby> 実は Julia はかなり低いレベルでこれに対応している 
+
+> ![alt text](img/image.png-2.png) <   It feels strange to me to make RNGs this low-level, but it might be necessary. $^{*1}$
+
+<div class="cite">
+
+$^{*1}$ https://github.com/JuliaLang/julia/pull/34852#issuecomment-590670749
+
+</div>
+
+
+---
+
+
+
