@@ -8,7 +8,7 @@ theme: honwaka
 
 <!-- _header: Appendix -->
 
-<div style="font-size: 0.8em;">
+<div style="font-size: 0.6em;">
 
 ### 参考文献
 
@@ -22,6 +22,8 @@ theme: honwaka
 [4] Vigna, Sebastiano. "It is high time we let go of the Mersenne Twister." arXiv preprint arXiv:1910.06437 (2019).
 
 [5] Chris Wellons. "Finding the Best 64-bit Simulation PRNG". https://nullprogram.com/blog/2017/09/21/
+
+[6] L’Ecuyer, Pierre, et al. "Random numbers for parallel computers: Requirements and methods, with emphasis on GPUs." Mathematics and Computers in Simulation 135 (2017): 3-17.
 
 ### ソースコード
 

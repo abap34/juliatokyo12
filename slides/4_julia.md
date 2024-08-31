@@ -94,7 +94,7 @@ A. その名のとおり、  <span style="font-size: 1.2em;">**`Task` 固有の�
 <br>
 
 
-- 共通の乱数生成器を参照したせいで、乱数を要求したタイミング次第で得られる乱数が異なってしまっていた！
+- 共通の乱数生成器を使うと、乱数の要求タイミング次第で得られる乱数が異なる.
 
 <div style="text-align: center;">
 
@@ -111,10 +111,13 @@ A. その名のとおり、  <span style="font-size: 1.2em;">**`Task` 固有の�
 )**、そこから取り出す ことで、 <span class="orangelined">**タイミングに依らず同じ結果になる！**</span>
 
 
-
-
 </div>
 
+<div class="cite">
+　
+この「作成」の方法については、参考文献 [7] などを参照してください.
+
+</div>
 
 ---
 
@@ -154,7 +157,9 @@ void jl_rng_split(uint64_t dst[JL_RNG_SIZE], uint64_t src[JL_RNG_SIZE]) JL_NOTSA
 }
 ```
 
-(https://github.com/JuliaLang/julia/blob/4c2f728a9976a5651acfe2f7eba703e6d0b64562/src/task.c#L1094)
+
+<span style="font-size: 0.8em;">(https://github.com/JuliaLang/julia/blob/4c2f728a9976a5651acfe2f7eba703e6d0b64562/src/task.c#L1094)</span>
+
 </span>
 
 ---
@@ -187,10 +192,15 @@ Xoshiro(0xf41c78cbc898a2cf, 0xbe2efdab9d7feb15,
 
 <br>
 
-![h:450 center](img/image.png-5.png)
+
+![h:450 center](img/image.png-4.png)
+
 
 <div style="text-align: center;">
 
 **✅ `s1, s2, s3, s4` だけで OK.**
 
 </div>
+
+---
+
