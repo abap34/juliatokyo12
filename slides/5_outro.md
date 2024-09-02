@@ -39,9 +39,7 @@ theme: honwaka
 
 [5] Chris Wellons. "Finding the Best 64-bit Simulation PRNG". https://nullprogram.com/blog/2017/09/21/
 
-[6] L’Ecuyer, Pierre, et al. "Random numbers for parallel computers: Requirements and methods, with emphasis on GPUs." Mathematics and Computers in Simulation 135 (2017): 3-17.
-
-[7] 杉山将. 統計的機械学習: 生成モデルに基づくパターン認識. オーム社, 2009. ISBN 9784274502484. Google Books, https://books.google.co.jp/books?id=yK-IQgAACAAJ.
+[6] 杉山将. 統計的機械学習: 生成モデルに基づくパターン認識. オーム社, 2009. ISBN 9784274502484. Google Books, https://books.google.co.jp/books?id=yK-IQgAACAAJ.
 
 ### ソースコード
 
